@@ -1,0 +1,24 @@
+version: '3'
+services: 
+    # mysql:
+
+    nginx: 
+
+        build: 
+            dockerfile: nginx-dockerfile
+            context: .
+        image: nginx:latest
+        container_name: nginx
+        ports:
+            - "8080:80"
+        networks: 
+            agenda-network:
+                ipv4_address: 172.19.0.6      
+        volumes:
+            - .:/var/www
+networks: 
+    agenda-network:
+        driver: bridge
+        ipam:
+         config:
+           - subnet: 172.19.0.0/16
